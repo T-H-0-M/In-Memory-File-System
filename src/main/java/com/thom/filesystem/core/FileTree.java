@@ -145,9 +145,22 @@ public final class FileTree {
     public List<String> ls(String path, DirectoryNode cwd) {
         Objects.requireNonNull(cwd, "cwd");
         if (path == null || path.isBlank()) {
-            return cwd.childNames();
+            return toLsDisplayNames(cwd);
         }
-        return resolveDir(path, cwd).childNames();
+        return toLsDisplayNames(resolveDir(path, cwd));
+    }
+
+    private static List<String> toLsDisplayNames(DirectoryNode dir) {
+        var displayNames = new ArrayList<String>();
+        for (var name : dir.childNames()) {
+            var child = dir.getChild(name);
+            if (child instanceof DirectoryNode) {
+                displayNames.add(name + "/");
+            } else {
+                displayNames.add(name);
+            }
+        }
+        return List.copyOf(displayNames);
     }
 
     public DirectoryNode cd(String path, DirectoryNode cwd) {
