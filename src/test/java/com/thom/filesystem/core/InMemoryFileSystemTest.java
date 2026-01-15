@@ -29,7 +29,7 @@ class InMemoryFileSystemTest {
         assertEquals(java.util.List.of("x"), fs.ls());
 
         fs.cd("..");
-        assertEquals(java.util.List.of("a"), fs.ls());
+        assertEquals(java.util.List.of("a/"), fs.ls());
     }
 
     @Test
@@ -40,7 +40,7 @@ class InMemoryFileSystemTest {
         fs.cd("/a");
         fs.mkdir("b");
 
-        assertEquals(java.util.List.of("b"), fs.ls());
+        assertEquals(java.util.List.of("b/"), fs.ls());
 
         fs.cd("b");
         assertEquals(java.util.List.of(), fs.ls());

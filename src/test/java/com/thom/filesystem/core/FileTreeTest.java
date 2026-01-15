@@ -102,7 +102,7 @@ class FileTreeTest {
         tree.mkdir("/a", root);
         tree.touch("m", root);
 
-        assertEquals(java.util.List.of("a", "b", "m", "z"), tree.ls("/", root));
+        assertEquals(java.util.List.of("a/", "b/", "m", "z"), tree.ls("/", root));
     }
 
     @Test
